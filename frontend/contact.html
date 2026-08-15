@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — TutorHub UAE</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="container-page py-10">
+    <h1 class="text-2xl mb-1">Get in Touch</h1>
+    <p class="text-gray-600 mb-8">We'd love to hear from you. Fill out the form or use the details below.</p>
+
+    <div class="grid lg:grid-cols-[1fr_360px] gap-8 mb-14">
+      <form id="contact-form" class="card p-6 space-y-4">
+        <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
+        <div>
+          <label class="form-label">Full Name</label>
+          <input required name="full_name" type="text" class="form-input" />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="form-label">Email</label>
+            <input required name="email" type="email" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">Phone</label>
+            <input name="phone" type="tel" class="form-input" />
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Subject</label>
+          <select name="subject" class="form-select">
+            <option value="">Select…</option>
+            <option>General Question</option>
+            <option>Tutor Support</option>
+            <option>Report an Issue</option>
+            <option>Partnership</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Message</label>
+          <textarea required name="message" rows="5" class="form-textarea"></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full">Send Message</button>
+      </form>
+
+      <div class="space-y-6">
+        <div class="card bg-brand-50/50 p-6">
+          <h2 class="font-semibold text-brand-900 mb-3">Office Information</h2>
+          <dl class="space-y-3 text-sm">
+            <div>
+              <dt class="font-medium text-gray-700">Address</dt>
+              <dd class="text-gray-600">Business Bay, Dubai, UAE</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-gray-700">Phone</dt>
+              <dd class="text-gray-600">+971 4 000 0000</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-gray-700">Email</dt>
+              <dd class="text-gray-600">hello@tutorhub-uae.com</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-gray-700">Hours</dt>
+              <dd class="text-gray-600">Sun–Thu 9:00–18:00<br />Sat 10:00–14:00, Fri Closed</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="card p-6 h-48 flex items-center justify-center text-center text-sm text-gray-500">
+          Interactive map — Business Bay, Dubai
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <h2 class="text-xl mb-4">Frequently Asked Questions</h2>
+      <div id="faq-list" class="grid md:grid-cols-2 gap-3"></div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/components/toast.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/faqData.js"></script>
+  <script src="/js/contact.js"></script>
+</body>
+</html>

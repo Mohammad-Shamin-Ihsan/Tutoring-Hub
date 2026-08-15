@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Users — TutorHub UAE Admin</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="bg-gray-50">
+  <div class="flex min-h-screen">
+    <div id="admin-sidebar" class="w-64 shrink-0"></div>
+
+    <div class="flex-1 p-6 md:p-8 min-w-0">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <div>
+          <p class="text-xs text-gray-500">Admin &gt; Users</p>
+          <h1 class="text-2xl">Registered Users</h1>
+        </div>
+        <select id="role-filter" class="form-select">
+          <option value="">All roles</option>
+          <option value="tutor">Tutors</option>
+          <option value="admin">Admins</option>
+        </select>
+      </div>
+
+      <div class="card overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-gray-500 border-b border-gray-200 bg-gray-50">
+              <th class="py-3 px-4">Name</th>
+              <th class="py-3 px-4">Email</th>
+              <th class="py-3 px-4">Role</th>
+              <th class="py-3 px-4">Phone</th>
+              <th class="py-3 px-4">Joined</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4">Action</th>
+            </tr>
+          </thead>
+          <tbody id="users-body">
+            <tr><td colspan="7" class="py-6 px-4 text-gray-500">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/components/toast.js"></script>
+  <script src="/js/admin/layout.js"></script>
+  <script src="/js/admin/users.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Tutors — TutorHub UAE</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="container-page py-8">
+    <div class="flex items-center justify-between gap-3 mb-4 md:hidden">
+      <button id="filters-toggle" class="btn-outline flex-1">Filters</button>
+      <select id="sort-select-mobile" class="form-select flex-1">
+        <option value="newest">Newest</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="experience">Most Experienced</option>
+      </select>
+    </div>
+
+    <div class="grid md:grid-cols-[280px_1fr] gap-8">
+      <aside id="filters-panel" class="hidden md:block card p-5 h-fit space-y-5">
+        <h2 class="font-semibold text-brand-900">Filters</h2>
+
+        <div>
+          <label class="form-label">Subject</label>
+          <select id="f-subject" class="form-select"><option value="">Select subject</option></select>
+        </div>
+        <div>
+          <label class="form-label">Teaching Level</label>
+          <select id="f-level" class="form-select"><option value="">Select level</option></select>
+        </div>
+        <div>
+          <label class="form-label">Location</label>
+          <select id="f-location" class="form-select"><option value="">Select location</option></select>
+        </div>
+        <div>
+          <label class="form-label">Language</label>
+          <select id="f-language" class="form-select"><option value="">Select language</option></select>
+        </div>
+
+        <div>
+          <span class="form-label">Mode</span>
+          <div class="flex flex-col gap-2">
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="mode" value="" checked /> Any</label>
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="mode" value="online" /> Online</label>
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="mode" value="in_person" /> In-person</label>
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="mode" value="both" /> Both</label>
+          </div>
+        </div>
+
+        <div>
+          <label class="form-label">Price Range (AED/hr)</label>
+          <div class="flex items-center gap-2">
+            <input id="f-price-min" type="number" min="0" placeholder="Min" class="form-input" />
+            <span class="text-gray-400">–</span>
+            <input id="f-price-max" type="number" min="0" placeholder="Max" class="form-input" />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2 pt-2">
+          <button id="apply-filters" class="btn-primary">Apply Filters</button>
+          <button id="clear-filters" class="btn-outline">Clear All</button>
+        </div>
+      </aside>
+
+      <section>
+        <div class="hidden md:flex items-center justify-between mb-4">
+          <p id="results-count" class="text-sm text-gray-600">Loading…</p>
+          <select id="sort-select" class="form-select w-56">
+            <option value="newest">Newest</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="experience">Most Experienced</option>
+          </select>
+        </div>
+        <p id="results-count-mobile" class="md:hidden text-sm text-gray-600 mb-4"></p>
+
+        <div id="results-grid" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <p class="text-gray-500 text-sm">Loading tutors…</p>
+        </div>
+
+        <div id="pagination" class="mt-8 flex justify-center"></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/components/toast.js"></script>
+  <script src="/js/components/tutorCard.js"></script>
+  <script src="/js/components/pagination.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/search.js"></script>
+</body>
+</html>

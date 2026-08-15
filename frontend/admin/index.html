@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — TutorHub UAE</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="bg-gray-50">
+  <div class="flex min-h-screen">
+    <div id="admin-sidebar" class="w-64 shrink-0"></div>
+
+    <div class="flex-1 p-6 md:p-8 min-w-0">
+      <h1 class="text-2xl mb-6">Dashboard</h1>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <div class="card p-5">
+          <p class="text-sm text-gray-500 mb-1">Total Tutors</p>
+          <p id="stat-total-tutors" class="text-3xl font-bold text-brand-900">—</p>
+        </div>
+        <div class="card p-5">
+          <p class="text-sm text-gray-500 mb-1">Pending Approvals</p>
+          <p id="stat-pending" class="text-3xl font-bold text-brand-900">—</p>
+        </div>
+        <div class="card p-5">
+          <p class="text-sm text-gray-500 mb-1">Total Inquiries</p>
+          <p id="stat-inquiries" class="text-3xl font-bold text-brand-900">—</p>
+        </div>
+        <div class="card p-5">
+          <p class="text-sm text-gray-500 mb-1">Active Tutors</p>
+          <p id="stat-active" class="text-3xl font-bold text-brand-900">—</p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-[1fr_360px] gap-6">
+        <div class="card p-6">
+          <h2 class="font-semibold text-brand-900 mb-1">Monthly Signups</h2>
+          <p class="text-xs text-gray-500 mb-4">Last 6 months</p>
+          <div id="signup-chart" class="flex items-end gap-4 h-48"></div>
+        </div>
+        <div class="card p-6">
+          <h2 class="font-semibold text-brand-900 mb-3">Recent Activity</h2>
+          <ul id="activity-feed" class="space-y-3 text-sm"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/components/toast.js"></script>
+  <script src="/js/admin/layout.js"></script>
+  <script src="/js/admin/dashboard.js"></script>
+</body>
+</html>

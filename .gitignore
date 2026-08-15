@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Env secrets
+.env
+backend/.env
+
+# Uploads (user content, not source)
+backend/static/uploads/*
+!backend/static/uploads/.gitkeep
+
+# Node / Tailwind
+node_modules/
+frontend/css/styles.css
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log

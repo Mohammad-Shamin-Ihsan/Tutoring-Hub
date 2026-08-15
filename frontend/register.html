@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Become a Tutor — TutorHub UAE</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="container-page py-10 max-w-3xl">
+    <h1 class="text-2xl mb-1">Become a Tutor</h1>
+    <p class="text-gray-600 mb-8">Create your profile in four quick steps. Your profile is reviewed by our team before it goes live.</p>
+
+    <!-- Stepper -->
+    <div class="flex items-center justify-between mb-8">
+      <div class="step-indicator flex-1 flex items-center" data-step="1">
+        <span class="step-dot h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold border-2">1</span>
+        <span class="ml-2 text-sm font-medium hidden sm:inline">Account</span>
+        <span class="flex-1 h-px bg-gray-300 mx-3"></span>
+      </div>
+      <div class="step-indicator flex-1 flex items-center" data-step="2">
+        <span class="step-dot h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold border-2">2</span>
+        <span class="ml-2 text-sm font-medium hidden sm:inline">Profile</span>
+        <span class="flex-1 h-px bg-gray-300 mx-3"></span>
+      </div>
+      <div class="step-indicator flex-1 flex items-center" data-step="3">
+        <span class="step-dot h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold border-2">3</span>
+        <span class="ml-2 text-sm font-medium hidden sm:inline">Teaching</span>
+        <span class="flex-1 h-px bg-gray-300 mx-3"></span>
+      </div>
+      <div class="step-indicator flex items-center" data-step="4">
+        <span class="step-dot h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold border-2">4</span>
+        <span class="ml-2 text-sm font-medium hidden sm:inline">Review</span>
+      </div>
+    </div>
+
+    <!-- Step 1: Account -->
+    <section id="step-1" class="card p-6 space-y-4">
+      <h2 class="font-semibold text-brand-900">Step 1 — Account</h2>
+      <div>
+        <label class="form-label">Name</label>
+        <input required id="acc-name" type="text" class="form-input" />
+      </div>
+      <div>
+        <label class="form-label">Email</label>
+        <input required id="acc-email" type="email" class="form-input" />
+      </div>
+      <div>
+        <label class="form-label">Phone (optional)</label>
+        <input id="acc-phone" type="tel" class="form-input" />
+      </div>
+      <div>
+        <label class="form-label">Password</label>
+        <input required id="acc-password" type="password" minlength="8" class="form-input" />
+        <p class="text-xs text-gray-500 mt-1">At least 8 characters.</p>
+      </div>
+      <div class="flex justify-end pt-2">
+        <button id="step1-next" class="btn-primary">Next →</button>
+      </div>
+    </section>
+
+    <!-- Step 2: Profile -->
+    <section id="step-2" class="hidden card p-6 space-y-4">
+      <h2 class="font-semibold text-brand-900">Step 2 — Profile</h2>
+      <div>
+        <label class="form-label">Profile Photo</label>
+        <div class="flex items-center gap-4">
+          <img id="photo-preview" class="h-16 w-16 rounded-full bg-gray-100 object-cover hidden" />
+          <input id="prof-photo" type="file" accept="image/*" class="form-input" />
+        </div>
+      </div>
+      <div>
+        <label class="form-label">Biography</label>
+        <textarea id="prof-bio" rows="4" class="form-textarea" placeholder="Tell students and parents about your teaching style and background..."></textarea>
+      </div>
+      <div>
+        <label class="form-label">Qualification</label>
+        <input id="prof-qualification" type="text" class="form-input" placeholder="e.g. PhD Mathematics — Imperial College London" />
+      </div>
+      <div>
+        <label class="form-label">Years of Experience</label>
+        <input id="prof-experience" type="number" min="0" max="80" class="form-input" />
+      </div>
+      <div class="flex justify-between pt-2">
+        <button class="btn-outline step-back">← Back</button>
+        <button id="step2-next" class="btn-primary">Next →</button>
+      </div>
+    </section>
+
+    <!-- Step 3: Teaching -->
+    <section id="step-3" class="hidden card p-6 space-y-5">
+      <h2 class="font-semibold text-brand-900">Step 3 — Teaching</h2>
+      <div>
+        <label class="form-label">Subjects Taught</label>
+        <div id="teach-subjects" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div>
+        <label class="form-label">Languages</label>
+        <div id="teach-languages" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div>
+        <label class="form-label">Teaching Levels</label>
+        <div id="teach-levels" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div>
+        <label class="form-label">Service Areas</label>
+        <div id="teach-locations" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div>
+        <span class="form-label">Teaching Method</span>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="mode-online" /> Online</label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="mode-in-person" /> In-person</label>
+        </div>
+      </div>
+      <div>
+        <label class="form-label">Hourly Rate (AED)</label>
+        <input id="teach-rate" type="number" min="0" step="5" class="form-input" />
+      </div>
+      <div class="flex justify-between pt-2">
+        <button class="btn-outline step-back">← Back</button>
+        <button id="step3-next" class="btn-primary">Next →</button>
+      </div>
+    </section>
+
+    <!-- Step 4: Review -->
+    <section id="step-4" class="hidden card p-6 space-y-4">
+      <h2 class="font-semibold text-brand-900">Step 4 — Review</h2>
+      <p class="text-sm text-gray-600">Please review your information.</p>
+      <div id="review-summary" class="space-y-3 text-sm"></div>
+      <p class="text-xs text-gray-500">Your profile will be reviewed within 2–3 business days.</p>
+      <div class="flex justify-between pt-2">
+        <button class="btn-outline step-back">← Back</button>
+        <button id="submit-approval" class="btn-accent">Submit for Approval</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/components/toast.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/register.js"></script>
+</body>
+</html>

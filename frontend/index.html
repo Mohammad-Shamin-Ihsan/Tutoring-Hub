@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TutorHub UAE — Find the Perfect Tutor in Dubai</title>
+  <meta name="description" content="Connecting students and parents with qualified private tutors across Dubai and the UAE." />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-brand-50 to-white border-b border-gray-200">
+      <div class="container-page py-14 md:py-20 text-center">
+        <h1 class="text-3xl md:text-5xl mb-4">Find the Perfect Tutor in Dubai</h1>
+        <p class="text-gray-600 max-w-2xl mx-auto mb-8">Connecting students and parents with qualified private tutors across the UAE.</p>
+
+        <form id="hero-search-form" class="card p-3 md:p-4 flex flex-col md:flex-row gap-3 max-w-4xl mx-auto text-left">
+          <select id="hero-subject" class="form-select flex-1"><option value="">Subject</option></select>
+          <select id="hero-location" class="form-select flex-1"><option value="">Location</option></select>
+          <select id="hero-level" class="form-select flex-1"><option value="">Teaching Level</option></select>
+          <select id="hero-mode" class="form-select flex-1">
+            <option value="">Teaching Mode</option>
+            <option value="online">Online</option>
+            <option value="in_person">In-person</option>
+            <option value="both">Both</option>
+          </select>
+          <button type="submit" class="btn-primary whitespace-nowrap">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="container-page py-12 space-y-14">
+      <!-- Popular Subjects -->
+      <section>
+        <h2 class="text-xl mb-4">Popular Subjects</h2>
+        <div id="popular-subjects" class="flex flex-wrap gap-2"></div>
+      </section>
+
+      <!-- Featured Tutors -->
+      <section>
+        <h2 class="text-xl mb-4">Featured Tutors</h2>
+        <div id="featured-tutors" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <p class="text-gray-500 text-sm">Loading tutors…</p>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section>
+        <h2 class="text-xl mb-4">How It Works</h2>
+        <div class="grid gap-5 md:grid-cols-3">
+          <div class="card bg-gray-50 p-6">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-900 text-white text-sm font-bold mb-3">1</span>
+            <h3 class="font-semibold text-brand-900 mb-1">Search</h3>
+            <p class="text-sm text-gray-600">Browse tutors by subject, level, and location.</p>
+          </div>
+          <div class="card bg-gray-50 p-6">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-900 text-white text-sm font-bold mb-3">2</span>
+            <h3 class="font-semibold text-brand-900 mb-1">Compare</h3>
+            <p class="text-sm text-gray-600">Review profiles, qualifications, and pricing.</p>
+          </div>
+          <div class="card bg-gray-50 p-6">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-900 text-white text-sm font-bold mb-3">3</span>
+            <h3 class="font-semibold text-brand-900 mb-1">Contact</h3>
+            <p class="text-sm text-gray-600">Send an inquiry and hear back directly.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CTA -->
+    <section class="bg-brand-900">
+      <div class="container-page py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-white font-medium">Are you a tutor? Join TutorHub UAE today.</p>
+        <a href="/register.html" class="btn-accent">Become a Tutor</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/components/toast.js"></script>
+  <script src="/js/components/tutorCard.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/home.js"></script>
+</body>
+</html>

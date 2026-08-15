@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutor Dashboard — TutorHub UAE</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="container-page py-8">
+    <div class="grid md:grid-cols-[220px_1fr] gap-8">
+      <aside class="card p-3 h-fit">
+        <nav class="flex md:flex-col gap-1 overflow-x-auto">
+          <button data-tab="overview" class="dash-tab text-left px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap">Dashboard</button>
+          <button data-tab="edit-profile" class="dash-tab text-left px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap">Edit Profile</button>
+          <button data-tab="inquiries" class="dash-tab text-left px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap">My Inquiries</button>
+          <button data-tab="settings" class="dash-tab text-left px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap">Account Settings</button>
+          <button id="dash-logout" class="text-left px-3 py-2 rounded-md text-sm font-medium text-red-600 hover:bg-red-50 whitespace-nowrap">Logout</button>
+        </nav>
+      </aside>
+
+      <div>
+        <h1 id="welcome-heading" class="text-xl mb-6">Welcome back</h1>
+
+        <!-- Overview -->
+        <section id="tab-overview" class="dash-panel space-y-6">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="card p-5">
+              <p class="text-sm font-medium text-gray-500 mb-2">Profile Status</p>
+              <span id="status-badge" class="badge">…</span>
+              <p id="status-note" class="text-xs text-gray-500 mt-2"></p>
+            </div>
+            <div class="card p-5">
+              <p class="text-sm font-medium text-gray-500 mb-2">Profile Completion</p>
+              <p id="completion-pct" class="text-2xl font-bold text-brand-900">0%</p>
+              <div class="h-2 rounded-full bg-gray-100 mt-2 overflow-hidden">
+                <div id="completion-bar" class="h-full bg-brand-900" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="font-semibold text-brand-900">Recent Inquiries</h2>
+              <button data-tab="inquiries" class="dash-tab text-sm text-brand-700 font-medium hover:underline">View All</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="text-left text-gray-500 border-b border-gray-200">
+                    <th class="py-2 pr-4">Student</th>
+                    <th class="py-2 pr-4">Subject</th>
+                    <th class="py-2 pr-4">Date</th>
+                    <th class="py-2 pr-4">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-inquiries-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Edit Profile -->
+        <section id="tab-edit-profile" class="dash-panel hidden space-y-4">
+          <div class="card p-6 space-y-4">
+            <h2 class="font-semibold text-brand-900">Photo</h2>
+            <div class="flex items-center gap-4">
+              <img id="edit-photo-preview" class="h-16 w-16 rounded-full bg-gray-100 object-cover" />
+              <input id="edit-photo-input" type="file" accept="image/*" class="form-input" />
+            </div>
+          </div>
+          <div class="card p-6 space-y-4">
+            <h2 class="font-semibold text-brand-900">Profile</h2>
+            <div>
+              <label class="form-label">Biography</label>
+              <textarea id="edit-bio" rows="4" class="form-textarea"></textarea>
+            </div>
+            <div>
+              <label class="form-label">Qualification</label>
+              <input id="edit-qualification" type="text" class="form-input" />
+            </div>
+            <div>
+              <label class="form-label">Years of Experience</label>
+              <input id="edit-experience" type="number" min="0" max="80" class="form-input" />
+            </div>
+            <div>
+              <label class="form-label">Hourly Rate (AED)</label>
+              <input id="edit-rate" type="number" min="0" step="5" class="form-input" />
+            </div>
+          </div>
+          <div class="card p-6 space-y-5">
+            <h2 class="font-semibold text-brand-900">Teaching</h2>
+            <div>
+              <label class="form-label">Subjects Taught</label>
+              <div id="edit-subjects" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div>
+              <label class="form-label">Languages</label>
+              <div id="edit-languages" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div>
+              <label class="form-label">Teaching Levels</label>
+              <div id="edit-levels" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div>
+              <label class="form-label">Service Areas</label>
+              <div id="edit-locations" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div>
+              <span class="form-label">Teaching Method</span>
+              <div class="flex gap-4">
+                <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="edit-mode-online" /> Online</label>
+                <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="edit-mode-in-person" /> In-person</label>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <button id="save-profile-btn" class="btn-primary">Save Changes</button>
+          </div>
+        </section>
+
+        <!-- Inquiries -->
+        <section id="tab-inquiries" class="dash-panel hidden">
+          <div class="card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left text-gray-500 border-b border-gray-200 bg-gray-50">
+                  <th class="py-3 px-4">Student</th>
+                  <th class="py-3 px-4">Subject</th>
+                  <th class="py-3 px-4">Message</th>
+                  <th class="py-3 px-4">Date</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4">Action</th>
+                </tr>
+              </thead>
+              <tbody id="all-inquiries-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Settings -->
+        <section id="tab-settings" class="dash-panel hidden space-y-6">
+          <form id="account-form" class="card p-6 space-y-4">
+            <h2 class="font-semibold text-brand-900">Account Details</h2>
+            <div>
+              <label class="form-label">Name</label>
+              <input id="settings-name" type="text" class="form-input" />
+            </div>
+            <div>
+              <label class="form-label">Email</label>
+              <input id="settings-email" type="email" class="form-input" disabled />
+            </div>
+            <div>
+              <label class="form-label">Phone</label>
+              <input id="settings-phone" type="tel" class="form-input" />
+            </div>
+            <button type="submit" class="btn-primary">Save</button>
+          </form>
+
+          <form id="password-form" class="card p-6 space-y-4">
+            <h2 class="font-semibold text-brand-900">Change Password</h2>
+            <div>
+              <label class="form-label">Current Password</label>
+              <input required id="current-password" type="password" class="form-input" />
+            </div>
+            <div>
+              <label class="form-label">New Password</label>
+              <input required id="new-password" type="password" minlength="8" class="form-input" />
+            </div>
+            <button type="submit" class="btn-primary">Update Password</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/components/toast.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>
