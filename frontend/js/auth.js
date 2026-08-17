@@ -39,6 +39,11 @@ const auth = {
     this.saveSession(data.access_token, data.user);
     return data.user;
   },
+  async deleteAccount(currentPassword) {
+    await window.api.post("/api/auth/delete-account", { current_password: currentPassword });
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+    localStorage.removeItem(AUTH_USER_KEY);
+  },
   /** Redirects to login if not authenticated, or to home if wrong role. Call at top of protected pages. */
   requireRole(role) {
     const user = this.getUser();

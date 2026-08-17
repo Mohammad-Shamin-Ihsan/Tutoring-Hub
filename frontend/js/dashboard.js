@@ -274,6 +274,21 @@ document.getElementById("password-form").addEventListener("submit", async (e) =>
   }
 });
 
+document.getElementById("delete-account-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const password = document.getElementById("delete-password").value;
+  if (!confirm("This permanently deletes your account, profile, and all inquiries you've received. This cannot be undone. Continue?")) {
+    return;
+  }
+  try {
+    await window.auth.deleteAccount(password);
+    window.showToast("Account deleted.", "success");
+    window.location.href = "/index.html";
+  } catch (err) {
+    window.showToast(err.message || "Could not delete account", "error");
+  }
+});
+
 if (user) {
   activateTab("overview");
   loadOverview();

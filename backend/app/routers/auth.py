@@ -8,6 +8,7 @@ from app.models.user import User
 from app.schemas.auth import (
     AccountUpdate,
     ChangePasswordRequest,
+    DeleteAccountRequest,
     LoginRequest,
     RegisterRequest,
     TokenResponse,
@@ -100,4 +101,20 @@ def change_password(payload: ChangePasswordRequest, current_user: User = Depends
     if not verify_password(payload.current_password, current_user.password):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Current password is incorrect")
     current_user.password = hash_password(payload.new_password)
+    db.commit()
+
+
+@router.post("/delete-account", status_code=status.HTTP_204_NO_CONTENT)
+def delete_account(payload: DeleteAccountRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    if current_user.role not in ("student", "tutor"):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin accounts can't be self-deleted here")
+    if not verify_password(payload.current_password, current_user.password):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password is incorrect")
+
+    # For tutors this cascades (see database/schema.sql ON DELETE CASCADE)
+    # through tutor_profiles -> the subject/language/location/level join
+    # tables -> inquiries received. A student's own sent inquiries are left
+    # in place as a historical record, since inquiries store the sender's
+    # name/email as a snapshot rather than a live foreign key to users.
+    db.delete(current_user)
     db.commit()

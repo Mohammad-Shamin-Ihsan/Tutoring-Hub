@@ -14,7 +14,7 @@ function headerHtml() {
       ? `<a href="/admin/index.html" class="nav-link">Admin Dashboard</a> ${logoutButton}`
       : isTutor
         ? `<a href="/dashboard.html" class="nav-link">Dashboard</a> ${logoutButton}`
-        : `<span class="nav-link">Hi, ${user.name.split(" ")[0]}</span> ${logoutButton}`;
+        : `<a href="/account.html" class="nav-link">My Account</a> ${logoutButton}`;
 
   return `
   <header class="border-b border-gray-200 bg-white sticky top-0 z-40">
