@@ -17,6 +17,8 @@ DO $$ BEGIN
     CREATE TYPE user_role AS ENUM ('tutor', 'admin');
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 
+ALTER TYPE user_role ADD VALUE IF NOT EXISTS 'student';
+
 DO $$ BEGIN
     CREATE TYPE user_status AS ENUM ('active', 'suspended');
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;

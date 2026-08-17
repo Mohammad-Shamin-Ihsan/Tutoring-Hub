@@ -16,15 +16,20 @@ router = APIRouter(prefix="/api/inquiries", tags=["inquiries"])
 
 
 @router.post("", response_model=InquiryOut, status_code=status.HTTP_201_CREATED)
-def create_inquiry(payload: InquiryCreate, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+def create_inquiry(
+    payload: InquiryCreate,
+    background_tasks: BackgroundTasks,
+    user: User = Depends(require_role("student")),
+    db: Session = Depends(get_db),
+):
     if payload.website:
         # Honeypot tripped — report fabricated success so the bot doesn't learn anything,
         # but nothing is persisted or emailed.
         return InquiryOut(
             id=uuid.uuid4(),
             tutor_id=payload.tutor_id,
-            student_name=payload.student_name,
-            student_email=payload.student_email,
+            student_name=user.name,
+            student_email=user.email,
             student_phone=payload.student_phone,
             subject=payload.subject,
             message=payload.message,
@@ -36,13 +41,13 @@ def create_inquiry(payload: InquiryCreate, background_tasks: BackgroundTasks, db
     if tutor is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tutor not found")
 
-    if is_rate_limited(db, payload.student_email):
+    if is_rate_limited(db, user.email):
         raise HTTPException(status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail="Too many inquiries sent recently. Please try again later.")
 
     inquiry = Inquiry(
         tutor_id=payload.tutor_id,
-        student_name=payload.student_name,
-        student_email=payload.student_email,
+        student_name=user.name,
+        student_email=user.email,
         student_phone=payload.student_phone,
         subject=payload.subject,
         message=payload.message,
@@ -57,15 +62,16 @@ def create_inquiry(payload: InquiryCreate, background_tasks: BackgroundTasks, db
         background_tasks.add_task(
             send_email,
             tutor_user.email,
-            f"New inquiry from {payload.student_name} — TutorHub UAE",
+            f"New inquiry from {user.name} — TutorHub UAE",
             (
                 f"You have a new inquiry via TutorHub UAE.\n\n"
-                f"From: {payload.student_name} ({payload.student_email})\n"
+                f"From: {user.name} ({user.email})\n"
                 f"Phone: {payload.student_phone or 'not provided'}\n"
                 f"Subject: {payload.subject or 'not specified'}\n\n"
                 f"Message:\n{payload.message}\n\n"
-                f"Log in to your TutorHub dashboard to respond."
+                f"Reply directly to this email to reach {user.name}, or log in to your TutorHub dashboard to respond."
             ),
+            reply_to=user.email,
         )
 
     return inquiry

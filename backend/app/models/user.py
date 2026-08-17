@@ -16,7 +16,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(150), nullable=False)
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
     password: Mapped[str] = mapped_column(String(255), nullable=False)
-    role: Mapped[str] = mapped_column(Enum("tutor", "admin", name="user_role"), nullable=False, default="tutor")
+    role: Mapped[str] = mapped_column(Enum("tutor", "admin", "student", name="user_role"), nullable=False, default="tutor")
     phone: Mapped[str | None] = mapped_column(String(30), nullable=True)
     status: Mapped[str] = mapped_column(Enum("active", "suspended", name="user_status"), nullable=False, default="active")
     created_at: Mapped[datetime] = mapped_column(server_default=func.now(), nullable=False)

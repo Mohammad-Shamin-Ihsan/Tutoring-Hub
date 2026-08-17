@@ -8,7 +8,16 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
   submitBtn.textContent = "Logging in…";
   try {
     const user = await window.auth.login(email, password);
-    window.location.href = user.role === "admin" ? "/admin/index.html" : "/dashboard.html";
+    const redirect = new URLSearchParams(window.location.search).get("redirect");
+    if (redirect) {
+      window.location.href = redirect;
+    } else if (user.role === "admin") {
+      window.location.href = "/admin/index.html";
+    } else if (user.role === "tutor") {
+      window.location.href = "/dashboard.html";
+    } else {
+      window.location.href = "/search.html";
+    }
   } catch (err) {
     window.showToast(err.message || "Login failed", "error");
     submitBtn.disabled = false;

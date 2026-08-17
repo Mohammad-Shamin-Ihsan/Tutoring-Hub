@@ -6,8 +6,10 @@ from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 class InquiryCreate(BaseModel):
     tutor_id: uuid.UUID
-    student_name: str = Field(min_length=2, max_length=150)
-    student_email: EmailStr
+    # student_name / student_email are intentionally NOT accepted from the
+    # client — the inquiry endpoint requires a logged-in student/parent
+    # account, and those two fields are always taken from that account so
+    # they can't be spoofed.
     student_phone: str | None = Field(default=None, max_length=30)
     subject: str | None = Field(default=None, max_length=100)
     message: str = Field(min_length=5, max_length=2000)

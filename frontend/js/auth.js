@@ -34,6 +34,11 @@ const auth = {
     this.saveSession(data.access_token, data.user);
     return data.user;
   },
+  async registerStudent(payload) {
+    const data = await window.api.post("/api/auth/register-student", payload);
+    this.saveSession(data.access_token, data.user);
+    return data.user;
+  },
   /** Redirects to login if not authenticated, or to home if wrong role. Call at top of protected pages. */
   requireRole(role) {
     const user = this.getUser();

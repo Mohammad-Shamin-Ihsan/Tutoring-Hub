@@ -7,17 +7,10 @@ function inquiryModalHtml() {
     <div class="card w-full max-w-lg p-6 relative max-h-[90vh] overflow-y-auto">
       <button id="inquiry-modal-close" class="absolute top-4 right-4 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:bg-gray-50" aria-label="Close">&times;</button>
       <h3 class="text-lg font-bold text-brand-900">Contact Tutor</h3>
-      <p class="text-sm text-gray-600 mb-4">Send a message to <span id="inquiry-tutor-name" class="font-medium"></span></p>
+      <p class="text-sm text-gray-600 mb-1">Send a message to <span id="inquiry-tutor-name" class="font-medium"></span></p>
+      <p class="text-xs text-gray-500 mb-4">Sending as <span id="inquiry-sender-identity" class="font-medium"></span></p>
       <form id="inquiry-form" class="space-y-4">
         <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
-        <div>
-          <label class="form-label">Name</label>
-          <input required name="student_name" type="text" class="form-input" />
-        </div>
-        <div>
-          <label class="form-label">Email</label>
-          <input required name="student_email" type="email" class="form-input" />
-        </div>
         <div>
           <label class="form-label">Phone (optional)</label>
           <input name="student_phone" type="tel" class="form-input" />
@@ -97,9 +90,17 @@ async function initInquiryModal() {
 }
 
 async function openInquiryModal(tutorId, tutorName) {
+  const user = window.auth.getUser();
+  if (!window.auth.isAuthenticated() || !user || user.role !== "student") {
+    window.showToast("Please log in as a student/parent to contact a tutor.", "info");
+    window.location.href = `/login.html?redirect=${encodeURIComponent(window.location.href)}`;
+    return;
+  }
+
   await initInquiryModal();
   currentTutorId = tutorId;
   document.getElementById("inquiry-tutor-name").textContent = tutorName;
+  document.getElementById("inquiry-sender-identity").textContent = `${user.name} (${user.email})`;
   const modal = document.getElementById("inquiry-modal");
   modal.classList.remove("hidden");
   modal.classList.add("flex");

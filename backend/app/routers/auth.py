@@ -43,6 +43,28 @@ def register(payload: RegisterRequest, db: Session = Depends(get_db)):
     return TokenResponse(access_token=token, user=UserOut.model_validate(user))
 
 
+@router.post("/register-student", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
+def register_student(payload: RegisterRequest, db: Session = Depends(get_db)):
+    existing = db.query(User).filter(User.email == payload.email).first()
+    if existing:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="An account with this email already exists")
+
+    user = User(
+        name=payload.name,
+        email=payload.email,
+        password=hash_password(payload.password),
+        phone=payload.phone,
+        role="student",
+        status="active",
+    )
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+
+    token = create_access_token(user.id, user.role)
+    return TokenResponse(access_token=token, user=UserOut.model_validate(user))
+
+
 @router.post("/login", response_model=TokenResponse)
 def login(payload: LoginRequest, db: Session = Depends(get_db)):
     unauthorized = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password")

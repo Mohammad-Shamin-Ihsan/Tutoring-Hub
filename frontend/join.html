@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create an Account — TutorHub UAE</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="container-page py-16 max-w-md">
+    <div class="card p-8">
+      <h1 class="text-2xl mb-1 text-center">Find a Tutor</h1>
+      <p class="text-gray-600 text-sm text-center mb-6">Create a free account to contact tutors directly.</p>
+
+      <form id="join-form" class="space-y-4">
+        <div>
+          <label class="form-label">Full Name</label>
+          <input required name="name" type="text" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Email</label>
+          <input required name="email" type="email" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Phone (optional)</label>
+          <input name="phone" type="tel" class="form-input" />
+        </div>
+        <div>
+          <label class="form-label">Password</label>
+          <input required name="password" type="password" minlength="8" class="form-input" />
+          <p class="text-xs text-gray-500 mt-1">At least 8 characters.</p>
+        </div>
+        <button type="submit" class="btn-primary w-full">Create Account</button>
+      </form>
+
+      <p class="text-sm text-gray-600 text-center mt-6">
+        Already have an account? <a href="/login.html" class="text-brand-700 font-medium hover:underline">Log in</a>
+      </p>
+      <p class="text-sm text-gray-600 text-center mt-2">
+        Are you a tutor? <a href="/register.html" class="text-brand-700 font-medium hover:underline">Become a Tutor</a> instead.
+      </p>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/components/toast.js"></script>
+  <script src="/js/layout.js"></script>
+  <script src="/js/join.js"></script>
+</body>
+</html>

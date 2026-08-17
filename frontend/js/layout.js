@@ -7,13 +7,14 @@ function headerHtml() {
   const isTutor = user && user.role === "tutor";
   const isAdmin = user && user.role === "admin";
 
-  const rightLinks = user
-    ? isAdmin
-      ? `<a href="/admin/index.html" class="nav-link">Admin Dashboard</a>
-         <button id="logout-btn" class="btn-outline !py-2 !px-3">Logout</button>`
-      : `<a href="/dashboard.html" class="nav-link">Dashboard</a>
-         <button id="logout-btn" class="btn-outline !py-2 !px-3">Logout</button>`
-    : `<a href="/login.html" class="btn-outline !py-2 !px-3">Login</a>`;
+  const logoutButton = `<button id="logout-btn" class="btn-outline !py-2 !px-3">Logout</button>`;
+  const rightLinks = !user
+    ? `<a href="/login.html" class="btn-outline !py-2 !px-3">Login</a>`
+    : isAdmin
+      ? `<a href="/admin/index.html" class="nav-link">Admin Dashboard</a> ${logoutButton}`
+      : isTutor
+        ? `<a href="/dashboard.html" class="nav-link">Dashboard</a> ${logoutButton}`
+        : `<span class="nav-link">Hi, ${user.name.split(" ")[0]}</span> ${logoutButton}`;
 
   return `
   <header class="border-b border-gray-200 bg-white sticky top-0 z-40">
