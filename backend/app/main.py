@@ -9,6 +9,12 @@ from fastapi.staticfiles import StaticFiles
 from app.config import get_settings
 from app.routers import admin, auth, contact, inquiries, lookups, tutors
 
+# Uvicorn only configures its own "uvicorn.*" loggers, not the root logger,
+# so app-level logger.info() calls (e.g. the "SMTP not configured, logging
+# email instead" fallback) would otherwise be silently dropped below the
+# root logger's default WARNING threshold and never reach the console.
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+
 logger = logging.getLogger("tutorhub")
 
 settings = get_settings()
