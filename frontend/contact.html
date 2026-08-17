@@ -16,19 +16,10 @@
     <div class="grid lg:grid-cols-[1fr_360px] gap-8 mb-14">
       <form id="contact-form" class="card p-6 space-y-4">
         <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
+        <p id="contact-sender-identity" class="text-xs text-gray-500 hidden">Sending as <span class="font-medium"></span></p>
         <div>
-          <label class="form-label">Full Name</label>
-          <input required name="full_name" type="text" class="form-input" />
-        </div>
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="form-label">Email</label>
-            <input required name="email" type="email" class="form-input" />
-          </div>
-          <div>
-            <label class="form-label">Phone</label>
-            <input name="phone" type="tel" class="form-input" />
-          </div>
+          <label class="form-label">Phone</label>
+          <input name="phone" type="tel" class="form-input" />
         </div>
         <div>
           <label class="form-label">Subject</label>
